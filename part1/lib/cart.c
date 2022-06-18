@@ -127,7 +127,7 @@ const char *cart_type_name() {
     return "UNKNOWN";
 }
 
-bool cart_load(char *cart) {
+bool cart_load(char *cart) {//copying the cart name as the file name
     snprintf(ctx.filename, sizeof(ctx.filename), "%s", cart);
 
     FILE *fp = fopen(cart, "r");
@@ -139,17 +139,17 @@ bool cart_load(char *cart) {
 
     printf("Opened: %s\n", ctx.filename);
 
-    fseek(fp, 0, SEEK_END);
+    fseek(fp, 0, SEEK_END);//seek to the end to see the game size
     ctx.rom_size = ftell(fp);
 
     rewind(fp);
 
-    ctx.rom_data = malloc(ctx.rom_size);
-    fread(ctx.rom_data, ctx.rom_size, 1, fp);
+    ctx.rom_data = malloc(ctx.rom_size);//set the rom size to the size found above
+    fread(ctx.rom_data, ctx.rom_size, 1, fp);//read in file and close
     fclose(fp);
 
-    ctx.header = (rom_header *)(ctx.rom_data + 0x100);
-    ctx.header->title[15] = 0;
+    ctx.header = (rom_header *)(ctx.rom_data + 0x100);//set header pointer to here
+    ctx.header->title[15] = 0;//set title at idex 15 to zero null term
 
     printf("Cartridge Loaded:\n");
     printf("\t Title    : %s\n", ctx.header->title);
@@ -159,7 +159,7 @@ bool cart_load(char *cart) {
     printf("\t LIC Code : %2.2X (%s)\n", ctx.header->lic_code, cart_lic_name());
     printf("\t ROM Vers : %2.2X\n", ctx.header->version);
 
-    u16 x = 0;
+    u16 x = 0;//check sum
     for (u16 i=0x0134; i<=0x014C; i++) {
         x = x - ctx.rom_data[i] - 1;
     }
