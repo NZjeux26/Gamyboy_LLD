@@ -12,3 +12,4 @@ https://github.com/rockytriton/LLD_gbemu/raw/main/docs/The%20Cycle-Accurate%20Ga
 
 https://github.com/rockytriton/LLD_gbemu/raw/main/docs/gbctr.pdf
 
+I'm jsut following along the tutorial. Getting my first dig into emulation. 
