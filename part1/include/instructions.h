@@ -45,6 +45,7 @@ typedef enum{
 } reg_type;
 
 typedef enum{
+    IN_NONE,//default type/zero value
     IN_NOP,
     IN_LD,
     IN_INC,
@@ -107,3 +108,5 @@ typedef struct {
     cond_type cond;
     u8 param;
 } instruction;// a full instruction input sequence
+
+instruction *instruction_by_opcode(byte opcode);
