@@ -22,6 +22,7 @@ typedef struct //what the CPU is doing
 
     u16 fetch_data;
     u16 mem_dest;
+    bool dest_is_mem;
     u16 cur_opcode;
     instruction *cur_inst;
 
