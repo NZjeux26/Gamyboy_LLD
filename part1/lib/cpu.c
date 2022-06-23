@@ -1,5 +1,8 @@
 #include <cpu.h>
+#include <emu.h>
 #include <bus.h>
+
+
 cpu_contex ctx = {0};
 
 void cpu_init() {
@@ -9,6 +12,11 @@ void cpu_init() {
 static void fetch_instruction(){
     ctx.cur_opcode = bus_read(ctx.regs.pc++);//read next opcode, inc PC by 1
     ctx.cur_inst = instruction_by_opcode(ctx.cur_opcode);//get the instruction
+
+    if (ctx.cur_inst == NULL){//if the current instruction is blank, throw
+        printf("Unknown Instruction! %02X\n", ctx.cur_opcode);
+        exit(-7);
+    }
 }
 
 static void fetch_data(){
@@ -37,12 +45,15 @@ static void fetch_data(){
             ctx.regs.pc += 2;
             return;
         }
-
+        default:
+            printf("UNknown addressing mode! %d\n", ctx.cur_inst->mode);
+            exit(-7);
+            return;
     }
 }
 
 static void execute(){
-
+    printf("Not doing this quite yet! \n");
 }
 
 bool cpu_step() {

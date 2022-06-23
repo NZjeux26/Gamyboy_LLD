@@ -1,5 +1,5 @@
 #include <bus.h>
-
+#include <cart.h>
 u8 bus_read(u16 address){   //reads from rom
     if (address < 0x8000){//ROM Data
         return cart_read(address);  // if less than addeess 0x8000 return the cartridge address

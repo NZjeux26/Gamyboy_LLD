@@ -109,4 +109,4 @@ typedef struct {
     u8 param;
 } instruction;// a full instruction input sequence
 
-instruction *instruction_by_opcode(byte opcode);
+instruction *instruction_by_opcode(u8 opcode);

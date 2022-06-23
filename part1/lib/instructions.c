@@ -13,7 +13,7 @@ instruction instructions[0x100] = {
     [0xC3] = {IN_JP, AM_D16}
 };
 
-instruction *instruction_by_opcode(byte opcode){
+instruction *instruction_by_opcode(u8 opcode){
     if (instructions[opcode].type == IN_NONE){//check for none/ERROR
         return NULL;
     }
